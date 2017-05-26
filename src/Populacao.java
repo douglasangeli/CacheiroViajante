@@ -1,8 +1,5 @@
 import java.util.*;
 
-/**
- * Created by dougl on 18/05/2017.
- */
 public class Populacao {
 
     private int tamanho = 5;
@@ -20,6 +17,10 @@ public class Populacao {
     public String toString() {
         String retorno = "";
 
+        if(this.cromossomos == null){
+            return  retorno;
+        }
+
         for (Cromossomo item : this.cromossomos) {
             retorno += item + "\n";
         }
@@ -35,11 +36,12 @@ public class Populacao {
     private ArrayList<Cromossomo> crossover(Cromossomo pai, Cromossomo mae) {
 
         ArrayList<Cromossomo> retorno = new ArrayList<>();
-        String genesPai = pai.getStringRepresentation();
-        String genesMae = mae.getStringRepresentation();
+        String genesPai = pai.getGenes();
+        String genesMae = mae.getGenes();
         String filho1 = "";
         String filho2 = "";
 
+        //filho 1, primeira metade do pai e o resto da mae
         filho1 += genesPai.substring(0, 3);
         for (int i = 0; filho1.length() < genesPai.length(); i++) {
             String m = genesMae.charAt(i) + "";
@@ -48,6 +50,7 @@ public class Populacao {
             }
         }
 
+        //filho 2, primeira metade da mae e o resto do pai
         filho2 += genesMae.substring(0, 3);
         for (int i = 0; filho2.length() < genesMae.length(); i++) {
             String m = genesPai.charAt(i) + "";
@@ -55,7 +58,8 @@ public class Populacao {
                 filho2 += m;
             }
         }
-        // Faz mutacao em ponto randomico trocando dois pontos
+
+        // Faz mutacao trocando dois pontos randomicos
         Random rand = new Random();
         int pontoMutacao1 = rand.nextInt(genesPai.length());
         int pontoMutacao2 = rand.nextInt(genesPai.length());
@@ -69,12 +73,9 @@ public class Populacao {
         f2.setCharAt(pontoMutacao1, filho2.charAt(pontoMutacao2));
         f2.setCharAt(pontoMutacao2, filho2.charAt(pontoMutacao1));
         filho2 = f2.toString();
-
-//
-        Cromossomo cromossomo1 = new Cromossomo(filho1);
-        Cromossomo cromossomo2 = new Cromossomo(filho2);
-        retorno.add(cromossomo1);
-        retorno.add(cromossomo2);
+        //
+        retorno.add(new Cromossomo(filho1));
+        retorno.add(new Cromossomo(filho2));
         return retorno;
     }
 

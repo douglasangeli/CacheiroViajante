@@ -1,8 +1,5 @@
 import java.util.Random;
 
-/**
- * Created by Douglas on 25/05/2017.
- */
 public class Cidades {
     public static final String CIDADES = "ABCDEFGH";
 
@@ -45,10 +42,7 @@ public class Cidades {
             int distancia = Cidades.getDistancia(percurso.charAt(i), destino);
 
             distanciaTotal += distancia;
-            //System.out.println("Distancia " + percurso.charAt(i) + "->" + destino + " = " + distancia);
         }
-
-        //System.out.println("Total: " + distanciaTotal);
 
         return distanciaTotal;
     }

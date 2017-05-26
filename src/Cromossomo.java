@@ -1,36 +1,25 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Cromossomo implements Comparable<Cromossomo> {
 
-    private ArrayList<Character> genes;
+    private String genes;
 
     public Cromossomo() {
         this(Cidades.getPercursoAleatorio());
     }
 
     public Cromossomo(String percurso) {
-        this.genes = new ArrayList(Arrays.asList(percurso.toCharArray()));
+        this.genes = percurso;
     }
 
     @Override
     public String toString() {
-        return getStringRepresentation() + " distancia: " + this.getAptidao();
-    }
-
-    public String getStringRepresentation() {
-        StringBuilder builder = new StringBuilder(this.genes.size());
-        for (Object ch : (ArrayList)this.genes) {
-            builder.append(ch);
-        }
-        return builder.toString();
+        return this.genes + this.genes.charAt(0) + " distancia: " + this.getAptidao();
     }
 
     public int getAptidao() {
-        return Cidades.getDistanciaTotal(getStringRepresentation());
+        return Cidades.getDistanciaTotal(this.genes);
     }
 
-    public ArrayList<Character> getGenes() {
+    public String getGenes() {
         return genes;
     }
 
